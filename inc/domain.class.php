@@ -268,6 +268,7 @@ class PluginDomainsDomain extends CommonDBTM {
 
       $ong = [];
       $this->addDefaultFormTab($ong);
+      $this->addImpactTab($ong, $options);
       $this->addStandardTab('PluginDomainsDomain_Item', $ong, $options);
       $this->addStandardTab('Ticket', $ong, $options);
       $this->addStandardTab('Item_Problem', $ong, $options);

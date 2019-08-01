@@ -31,7 +31,7 @@ define('PLUGIN_DOMAINS_VERSION', '2.1.0');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_domains() {
-   global $PLUGIN_HOOKS;
+   global $PLUGIN_HOOKS, $CFG_GLPI;
 
    $PLUGIN_HOOKS['csrf_compliant']['domains']   = true;
    $PLUGIN_HOOKS['change_profile']['domains']   = ['PluginDomainsProfile', 'initProfile'];
@@ -83,6 +83,8 @@ function plugin_init_domains() {
 
       // End init, when all types are registered
       $PLUGIN_HOOKS['post_init']['domains'] = 'plugin_domains_postinit';
+
+      $CFG_GLPI["impact_asset_types"]["PluginDomainsDomain"] = "plugins/domains/img/domain.png";
    }
 }
 
@@ -115,7 +117,7 @@ function plugin_version_domains() {
  */
 function plugin_domains_check_prerequisites() {
    if (version_compare(GLPI_VERSION, '9.4', 'lt')
-       || version_compare(GLPI_VERSION, '9.5', 'ge')) {
+       || version_compare(GLPI_VERSION, '40', 'ge')) {
       if (method_exists('Plugin', 'messageIncompatible')) {
          echo Plugin::messageIncompatible('core', '9.4');
       }
